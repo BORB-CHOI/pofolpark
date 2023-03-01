@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pofolpark-backend"
+version = "0.1.0"
+description = ""
+authors = ["BORB <qzsec299@naver.com>"]
+readme = "README.md"
+packages = [{include = "pofolpark_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^4.1.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
