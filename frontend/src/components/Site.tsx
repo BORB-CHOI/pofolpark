@@ -32,7 +32,7 @@ export default function Site() {
           {/* )}  */}
 
           <Box
-            w="88%"
+            w="87%"
             h="85%"
             border="1px solid"
             position="relative"
