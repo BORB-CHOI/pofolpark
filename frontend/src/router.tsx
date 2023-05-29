@@ -2,8 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
-import TodoPage from "./routes/TodoPage";
-import StateGenerator from "./routes/StateGenerator";
+import TransTodo from "./routes/TransTodo";
 
 const router = createBrowserRouter([
   {
@@ -16,16 +15,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "todo",
-        element: <TodoPage />,
-      },
-      {
-        path: "state-generator",
-        element: <StateGenerator />,
+        path: "trans-todo",
+        element: <TransTodo />,
       },
     ],
   },
 ]);
-
 
 export default router;

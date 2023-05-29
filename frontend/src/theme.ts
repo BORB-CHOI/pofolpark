@@ -1,8 +1,4 @@
-import {
-  extendTheme,
-  useColorModeValue,
-  type ThemeConfig,
-} from "@chakra-ui/react";
+import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 
 const config: ThemeConfig = {
   initialColorMode: "system",
@@ -15,7 +11,6 @@ const theme = extendTheme({
     black: "#000",
     white: "#fff",
   },
-  bgColor: useColorModeValue("white", "gray.800"),
 });
 
 export default theme;
