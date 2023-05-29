@@ -10,75 +10,133 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
+import environ
 from pathlib import Path
+import dj_database_url
+
+
+# render은 많은 환경 변수를 대신 만들어줌.
+# render라는 환경 변수의 존재 여부에 따라서 DEBUG를 켜고 끄도록 작성.
+# ALLOWED_HOST는 너의 앱을 실행시킬 수 있는 도메인의 목록임.
+# RENDER_EXTERNAL_HOSTNAME는 render가 외부로 노출시키는 url임, render로 배포하면 랜덤 도메인이 만들어지고, 이 환경변수에 저장 됨.
+# poetry add dj-database-url psycopg2-binary
+# url을 통해서 db를 연결할 수 있게 만드는 라이브러리와 PostgreSQL과 django가 대화할 수 있도록 하는 드라이버 설치.
+# render가 db를 만들면 생성하는 db url 환경변수를 연결.
+# username, password 같은 것들을 복사, 붙여넣기 하지 않아서 더 안전함.
+# coon_max_age는 DB 연결 유지 시간임.
+# static 파일을 프로덕션에서 다루기 위해 whitenoise[brotli] 설치.
+# poetry add 'whitenoise[brotli]'
+# 그리고 DEBUG 아닐 때의 static 경로 지정.
+# build.sh 파일 생성 후, 코드가 업로드 되었을 때 자동으로 실행할 script 작성, install, collectstatic, migrate 등이 있음.
+# collectstatic은 css,js 등의 static 파일을 모두 모아서 STATIC_ROOT 폴더에 넣어줌.
+# gunicorn은 프로덕션 환경에서 django 서버를 실행하는 방법임, 실제로 django 코드를 실행시키는 utility.
+# render는 render.yaml 파일을 읽음으로써 DB를 만들고, 웹 서비스를 만들어줄 거임.
+# 깃헙 로그인 하고 레포를 등록하면 render.yaml을 찾았다고 할 거임, 그리고 1달러 결제 후에 시작 가능.
+# 우리 django 서버는 이미지를 사용하지 않으니 Pillow 제거.
+# django 버전 4.0.  대로 다운그레이드.
+# Python 버전 환경 변수 입력하라는 에러 해결.
+# 우리의 .env 파일에 있던 환경 변수 모두 복붙, 시크릿 제외.
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-si)lbj8zxbq*_6xz2gu2#)qz%ch-9^@br(6*!s-nt5=)(nbd%g'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = "RENDER" not in os.environ
+
 
 ALLOWED_HOSTS = []
 
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "corsheaders",
 ]
+
+CUSTOM_APPS = [
+    "chatgpt.apps.ChatgptConfig",
+]
+
+SYSTEM_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]
+
+INSTALLED_APPS = [*THIRD_PARTY_APPS, *CUSTOM_APPS, *SYSTEM_APPS]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": dj_database_url.config(
+            # Feel free to alter this value to suit your needs.
+            default="postgresql://postgres:postgres@localhost:5432/mysite",
+            conn_max_age=600,
+        )
+    }
 
 
 # Password validation
@@ -86,16 +144,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -103,9 +161,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "ko-kr"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -115,9 +173,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+
+if not DEBUG:
+    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+### CORS settings ###
+
+#  HTTP requests 요청, 즉 fetch를 허용할 origin을 설정.
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+
+# javascript로 fetch 허용
+CORS_ALLOW_CREDENTIALS = True
+
+# POST 되도록 CSRF token 제공.
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
