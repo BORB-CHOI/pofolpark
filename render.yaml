@@ -10,6 +10,7 @@ services:
     name: pofolback
     env: python
     region: singapore
+    rootDir: backend
     plan: free
     buildCommand: "./backend/build.sh"
     startCommand: "gunicorn config.wsgi:application"
