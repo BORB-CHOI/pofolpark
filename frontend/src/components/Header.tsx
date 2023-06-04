@@ -23,11 +23,7 @@ export default function Header() {
         alignItems="center"
         py={2}
         px={10}
-        direction={{
-          sm: "column",
-          md: "column",
-          lg: "row",
-        }}
+        direction={"row"}
       >
         <Box>
           <Link to={"/"}>

@@ -2,8 +2,11 @@ import { Box, Grid, HStack, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import Site from "../components/Site";
 import SiteSkeleton from "../components/SiteSkeleton";
+import { useQuery } from "react-query";
+import { getSites } from "../api";
 
 export default function Home() {
+  // const { isLoading: sitesIsLoading, data } = useQuery<[]>(["sites"], getSites);
   const [isLoading, setIsLoading] = useState(true);
 
   setTimeout(() => {
@@ -52,14 +55,12 @@ export default function Home() {
       {/* 콘텐츠 영역 */}
       <Grid
         mt={10}
-        columnGap={4}
-        rowGap={8}
+        columnGap={8}
+        rowGap={10}
         templateColumns={{
           sm: "1fr",
           md: "1fr 1fr",
           lg: "repeat(3, 1fr)",
-          xl: "repeat(4, 1fr)",
-          "2xl": "repeat(5, 1fr)",
         }}
       >
         {isLoading ? (
@@ -77,18 +78,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
-            <Site />
+            <Site title={"이상한 투두 생성기"} link={"/trans-todo"} />
           </>
         )}
       </Grid>

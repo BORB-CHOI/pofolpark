@@ -6,38 +6,50 @@ import {
   VStack,
   HStack,
   useColorModeValue,
+  Image,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import site01 from "../assets/site01.png";
 
-export default function Site() {
+interface ISiteProps {
+  title: string;
+  link: string;
+}
+
+export default function Site({ title, link }: ISiteProps) {
   const bgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Link to={`/sites`}>
+    <Link to={link}>
       <VStack alignItems={"flex-start"}>
         {/* Web 사이트 모양 */}
         <Stack
           w="100%"
-          height={"280px"}
+          paddingTop={"5%"}
+          paddingBottom={"5%"}
           alignItems={"center"}
           justifyContent={"center"}
           mb={1}
           rounded="2.5em"
           border="1px solid"
         >
-          {/* {imageUrl ? (
-            <Image objectFit={"cover"} minH="280" src={imageUrl} />
-          ) : (*/}
-
-          {/* )}  */}
-
           <Box
-            w="87%"
-            h="85%"
+            w="89%"
+            aspectRatio="16/9"
             border="1px solid"
             position="relative"
             overflow={"hidden"}
           >
+            {site01 ? (
+              <Image
+                position={"absolute"}
+                objectFit={"fill"}
+                transform={"translateY(10%)"}
+                zIndex={-1}
+                src={site01}
+              />
+            ) : // <Box minH="280px" h="100%" w="100%" p={10} bg="green.400" />
+            null}
             <HStack
               pl={1}
               h={4}
@@ -78,12 +90,15 @@ export default function Site() {
             {/* )} */}
           </Box>
         </Stack>
-        <Box>
-          <Grid gap={2} templateColumns={"6fr 1fr"}>
-            <Text display={"block"} noOfLines={1} fontSize="sm">
-              아직 비었습니다
-            </Text>
-          </Grid>
+        <Box w={"100%"}>
+          <Text
+            display={"block"}
+            textAlign={"center"}
+            noOfLines={1}
+            fontSize="sm"
+          >
+            {title}
+          </Text>
         </Box>
       </VStack>
     </Link>
