@@ -193,11 +193,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 ### CORS settings ###
 
-#  HTTP requests 요청, 즉 fetch를 허용할 origin을 설정.
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
-
 # javascript로 fetch 허용
 CORS_ALLOW_CREDENTIALS = True
 
-# POST 되도록 CSRF token 제공.
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+if DEBUG:
+    #  HTTP requests 요청, 즉 fetch를 허용할 origin을 설정.
+    CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+    # POST 되도록 CSRF token 제공.
+    CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+else:
+    CORS_ALLOWED_ORIGINS = ["https://pofolpark.onrender.com"]
+    CSRF_TRUSTED_ORIGINS = ["https://pofolpark.onrender.com"]
