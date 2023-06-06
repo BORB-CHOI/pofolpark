@@ -1,6 +1,5 @@
 import {
   Box,
-  Grid,
   Text,
   Stack,
   VStack,
@@ -33,23 +32,7 @@ export default function Site({ title, link }: ISiteProps) {
           rounded="2.5em"
           border="1px solid"
         >
-          <Box
-            w="89%"
-            aspectRatio="16/9"
-            border="1px solid"
-            position="relative"
-            overflow={"hidden"}
-          >
-            {site01 ? (
-              <Image
-                position={"absolute"}
-                objectFit={"fill"}
-                transform={"translateY(10%)"}
-                zIndex={-1}
-                src={site01}
-              />
-            ) : // <Box minH="280px" h="100%" w="100%" p={10} bg="green.400" />
-            null}
+          <Box w="89%" border="1px solid" overflow={"hidden"}>
             <HStack
               pl={1}
               h={4}
@@ -83,11 +66,7 @@ export default function Site({ title, link }: ISiteProps) {
                 borderTopRadius={5}
               ></Box>
             </HStack>
-            {/* {imageUrl ? (
-              <Image objectFit={"cover"} minH="280" src={imageUrl} />
-            ) : ( */}
-            <Box minH="280px" h="100%" w="100%" />
-            {/* )} */}
+            <Image objectFit={"contain"} src={site01} />
           </Box>
         </Stack>
         <Box w={"100%"}>
