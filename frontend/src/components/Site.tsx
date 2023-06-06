@@ -66,11 +66,15 @@ export default function Site({ title, link }: ISiteProps) {
                 borderTopRadius={5}
               ></Box>
             </HStack>
-            <Image
-              style={{ aspectRatio: 16 / 9 }}
-              objectFit={"cover"}
-              src={site01}
-            />
+            {site01 ? (
+              <Image
+                style={{ aspectRatio: 16 / 9 }}
+                objectFit={"cover"}
+                src={site01}
+              />
+            ) : (
+              <Box style={{ aspectRatio: 16 / 9 }} bg={bgColor}></Box>
+            )}
           </Box>
         </Stack>
         <Box w={"100%"}>
