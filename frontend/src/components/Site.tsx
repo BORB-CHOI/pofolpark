@@ -67,11 +67,13 @@ export default function Site({ title, link }: ISiteProps) {
               ></Box>
             </HStack>
             {site01 ? (
-              <Image
-                style={{ aspectRatio: 16 / 9 }}
-                objectFit={"cover"}
-                src={site01}
-              />
+              <Box style={{ aspectRatio: 16 / 9 }} bg={bgColor}>
+                <Image
+                  style={{ aspectRatio: 16 / 9 }}
+                  objectFit={"cover"}
+                  src={site01}
+                />
+              </Box>
             ) : (
               <Box style={{ aspectRatio: 16 / 9 }} bg={bgColor}></Box>
             )}
@@ -82,7 +84,7 @@ export default function Site({ title, link }: ISiteProps) {
             display={"block"}
             textAlign={"center"}
             noOfLines={1}
-            fontSize="sm"
+            fontSize="md"
           >
             {title}
           </Text>

@@ -3,6 +3,10 @@ import Root from "./components/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
 import TransTodo from "./routes/TransTodo";
+import SuitableTemperatureMain from "./routes/SuitableTemperature/Main";
+import SuitableTemperatureSearch from "./routes/SuitableTemperature/Search";
+import SuitableTemperatureDetail from "./routes/SuitableTemperature/Detail";
+// What the fuck
 
 const router = createBrowserRouter([
   {
@@ -15,9 +19,25 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "trans-todo",
-        element: <TransTodo />,
-      },
+        path: "suitable-temperature",
+        children: [
+          {
+            path: "",
+            element: <SuitableTemperatureMain />,
+          },
+          {
+            path: "search",
+            element: <SuitableTemperatureSearch />,
+          },
+          {
+            path: ":country/:latitude/:longitude",
+            element: <SuitableTemperatureDetail />,
+          },
+        ],
+      }, // {
+      //   path: "trans-todo",
+      //   element: <TransTodo />,
+      // },
     ],
   },
 ]);

@@ -1,4 +1,5 @@
 import "@fontsource/black-han-sans";
+import "@fontsource/fira-sans";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";

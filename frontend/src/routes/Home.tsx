@@ -3,7 +3,7 @@ import { useState } from "react";
 import Site from "../components/Site";
 import SiteSkeleton from "../components/SiteSkeleton";
 import { useQuery } from "react-query";
-import { getSites } from "../api";
+import { getSites } from "../utils/api";
 
 export default function Home() {
   // const { isLoading: sitesIsLoading, data } = useQuery<[]>(["sites"], getSites);
@@ -21,7 +21,7 @@ export default function Home() {
       }}
     >
       {/* 헤드라인 영역 */}
-      <VStack py={10}>
+      <VStack py={10} userSelect={"none"}>
         <Box fontFamily={"Black Han Sans"}>
           <Text display={"inline"} fontSize="7xl">
             너
@@ -79,6 +79,12 @@ export default function Home() {
         ) : (
           <>
             <Site title={"이상한 투두 생성기"} link={"/trans-todo"} />
+            <Site
+              title={
+                "여름이 싫으면 여름이 아니면 된다. 겨울이 싫다면 겨울이 아니면 된다."
+              }
+              link={"/suitable-temperature"}
+            />
           </>
         )}
       </Grid>

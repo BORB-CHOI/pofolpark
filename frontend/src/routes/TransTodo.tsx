@@ -21,10 +21,10 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { IVariables } from "../types";
+import { ITodoVariables } from "../types";
 import { TbTargetArrow } from "react-icons/tb";
 import { RiEmotionLine } from "react-icons/ri";
-import { transformTodo } from "../api";
+import { transformTodo } from "../utils/api";
 import { useState } from "react";
 
 const COUNTDOWN = 10;
@@ -32,7 +32,7 @@ const COUNTDOWN = 10;
 function TransTodo() {
   // useForm 덕분에 일일이 onChange, value를 설정해줄 필요가 없다.
   const bgColor = useColorModeValue("gray.100", "gray.800");
-  const { register, handleSubmit } = useForm<IVariables>();
+  const { register, handleSubmit } = useForm<ITodoVariables>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [goal, setGoal] = useState("");
   const [explain, setExplain] = useState("");
@@ -69,7 +69,7 @@ function TransTodo() {
     },
   });
 
-  const onSubmit = (data: IVariables) => {
+  const onSubmit = (data: ITodoVariables) => {
     // api로 어떤 요청을 보내는 것을 mutation이라고 한다. request와 동일한 개념이다.
     mutation.mutate(data);
   };

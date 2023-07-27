@@ -12,7 +12,72 @@ interface는 클래스와 달리 implements 키워드를 사용할 수 없다.
 interface는 클래스와 달리 생성자를 사용할 수 없다.
 interface는 클래스와 달리 new 키워드를 사용할 수 없다. */
 
-export interface IVariables {
+export interface ITodoVariables {
   condition: string;
   todo: string;
+}
+
+export interface IWeatherCountries extends Array<IWeatherCountry> {}
+
+export interface IWeatherCountry {
+  Country: Country;
+  EnglishName: string;
+  EpochTime: number;
+  GeoPosition: GeoPosition;
+  HasPrecipitation: boolean;
+  IsDayTime: boolean;
+  Key: string;
+  Link: string;
+  LocalObservationDateTime: string;
+  LocalizedName: string;
+  MobileLink: string;
+  PrecipitationType: string | null;
+  Temperature: Temperature;
+  TimeZone: TimeZone;
+  WeatherIcon: number;
+  WeatherText: string;
+}
+
+interface Country {
+  EnglishName: string;
+  ID: string;
+  LocalizedName: string;
+}
+
+interface GeoPosition {
+  Elevation: {
+    Imperial: {
+      Unit: string;
+      UnitType: number;
+      Value: number;
+    };
+    Metric: {
+      Unit: string;
+      UnitType: number;
+      Value: number;
+    };
+  };
+  Latitude: number;
+  Longitude: number;
+}
+
+interface Temperature {
+  Imperial: {
+    Unit: string;
+    UnitType: number;
+    Value: number;
+  };
+  Metric: {
+    Unit: string;
+    UnitType: number;
+    Value: number;
+  };
+}
+
+interface TimeZone {
+  Code: string;
+  GmtOffset: number;
+  IsDaylightSaving: boolean;
+  Name: string;
+  NextOffsetChange: string | null;
 }

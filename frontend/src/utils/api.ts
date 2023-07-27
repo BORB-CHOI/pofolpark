@@ -1,6 +1,6 @@
 import Cookie from "js-cookie";
 import axios from "axios";
-import { IVariables } from "./types";
+import { ITodoVariables } from "../types";
 
 const instance = axios.create({
   baseURL:
@@ -15,7 +15,7 @@ const instance = axios.create({
   // 2. 헤더에 Authorization 항목이 있는 요청
 });
 
-export const transformTodo = (variables: IVariables) =>
+export const transformTodo = (variables: ITodoVariables) =>
   instance
     .post(`chatgpt/`, variables, {
       headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
@@ -24,3 +24,17 @@ export const transformTodo = (variables: IVariables) =>
 
 export const getSites = () =>
   instance.get(`sites/`).then((response) => response.data);
+
+export const getAllWeather = (variables: ITodoVariables) =>
+  instance
+    .post(`chatgpt/`, variables, {
+      headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
+    })
+    .then((response) => response.data);
+
+export const getWeatherDetail = (variables: ITodoVariables) =>
+  instance
+    .post(`chatgpt/`, variables, {
+      headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
+    })
+    .then((response) => response.data);
