@@ -1,0 +1,27 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Frontend Installing Dependencies",
+      "command": "cd backend; poetry install"
+    },
+    {
+      "name": "Backend Installing Dependencies",
+      "command": "cd frontend; npm install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "frontend-dev ": {
+      "name": "frontend dev",
+      "command": "cd",
+      "runAtStart": true
+    },
+    "backend-dev ": {
+      "name": "backend dev",
+      "command": "poetry",
+      "runAtStart": true
+    }
+  }
+}
