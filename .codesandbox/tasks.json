@@ -13,15 +13,21 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "frontend-dev ": {
-      "name": "frontend dev",
-      "command": "cd",
-      "runAtStart": true
-    },
     "backend-dev ": {
       "name": "backend dev",
-      "command": "poetry",
-      "runAtStart": true
+      "command": "cd backend && poetry shell && python manage.py runserver",
+      "runAtStart": true,
+      "preview": {
+        "port": 8000
+      }
+    },
+    "frontend-dev ": {
+      "name": "frontend dev",
+      "command": "cd frontend; npm start",
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
     }
   }
 }
