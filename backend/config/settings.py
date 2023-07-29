@@ -57,7 +57,10 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = "RENDER" not in os.environ
 
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
@@ -207,3 +210,9 @@ if DEBUG:
 else:
     CORS_ALLOWED_ORIGINS = ["https://pofolpark.onrender.com"]
     CSRF_TRUSTED_ORIGINS = ["https://pofolpark.onrender.com"]
+
+
+# CodeSandBox를 위한 설정. iframe 안에서도 사이트 접속이 가능해짐.
+if DEBUG:
+    X_FRAME_OPTIONS = 'ALLOWALL'
+    XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
