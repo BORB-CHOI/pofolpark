@@ -72,10 +72,13 @@ if RENDER_EXTERNAL_HOSTNAME:
 THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
+    "django_crontab",
 ]
 
 CUSTOM_APPS = [
+    "common.apps.CommonConfig",
     "chatgpt.apps.ChatgptConfig",
+    "weathers.apps.WeathersConfig",
 ]
 
 SYSTEM_APPS = [
@@ -214,5 +217,15 @@ else:
 
 # CodeSandBox를 위한 설정. iframe 안에서도 사이트 접속이 가능해짐.
 if DEBUG:
-    X_FRAME_OPTIONS = 'ALLOWALL'
-    XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
+    X_FRAME_OPTIONS = "ALLOWALL"
+    XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
+
+
+# CronTab 설정
+CRONJOBS = [
+    (
+        "*/1 * * * *",
+        "weathers.cron.hello_every_minute",
+        ">> " + os.path.join(BASE_DIR, "config/log/cron.log"),
+    ),
+]

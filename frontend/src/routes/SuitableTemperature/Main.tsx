@@ -156,10 +156,7 @@ const List = () => {
       <VStack spacing={5}>
         {displayData?.slice(0, 5).map((country: IWeatherCountry, index) => {
           return (
-            <Link
-              to={`/suitable-temperature/${country.Key}/${country.GeoPosition.Latitude}/${country.GeoPosition.Longitude}`}
-              key={index}
-            >
+            <Link to={`/suitable-temperature/${country.Key}`} key={index}>
               <Grid
                 boxShadow="lg"
                 py="1"

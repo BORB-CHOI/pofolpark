@@ -2,21 +2,16 @@ import { Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { getWeatherDetail } from "../../utils/api";
 
 const Detail = () => {
-  const { country, latitude, longitude } = useParams();
+  const { id } = useParams();
 
-  const { data } = useQuery(
-    ["country", country, latitude, longitude],
-    async () => {
-      const { data } = await axios.get(
-        `https://restcountries.eu/rest/v2/name/${country}`
-      );
-      return data;
-    }
-  );
+  const { data } = useQuery(["country", id], getWeatherDetail);
 
-  console.log(country, latitude, longitude);
+  // "http://openweathermap.org/img/w/" + iconcode + ".png"
+
+  console.log(data);
   return (
     <Stack minH={"70vh"}>
       <Text>Detail Page</Text>

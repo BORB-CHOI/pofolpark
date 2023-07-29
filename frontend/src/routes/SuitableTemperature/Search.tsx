@@ -164,10 +164,7 @@ const Search = (props: any) => {
       <VStack spacing={5}>
         {displayData?.map((country: IWeatherCountry, index) => {
           return (
-            <Link
-              to={`/suitable-temperature/${country.Key}/${country.GeoPosition.Latitude}/${country.GeoPosition.Longitude}`}
-              key={index}
-            >
+            <Link to={`/suitable-temperature/${country.Key}`} key={index}>
               <Grid
                 boxShadow="lg"
                 py="6"
@@ -185,10 +182,7 @@ const Search = (props: any) => {
                 />
                 <Text>{country.Country.LocalizedName}</Text>
                 <Text>{country.LocalizedName}</Text>
-                <Text>
-                  {country.Temperature.Metric.Value} °
-                  {country.Temperature.Metric.Unit}
-                </Text>
+                <Text>{country.Temperature.Metric.Value} °C</Text>
               </Grid>
             </Link>
           );
