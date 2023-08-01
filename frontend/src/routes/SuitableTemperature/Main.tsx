@@ -29,9 +29,9 @@ import {
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import jsonData from "../../assets/weather.json";
 import { Link, useNavigate } from "react-router-dom";
 import { sortData } from "../../utils/suitableTemperatureUtils";
+import { getAllWeather } from "../../utils/api";
 
 interface IFormInputs {
   keyword: string;
@@ -44,16 +44,15 @@ const List = () => {
   const navigate = useNavigate();
   const bgColor = useColorModeValue("gray.50", "gray.700");
   const { register, handleSubmit } = useForm<IFormInputs>();
-  const [data] = useState<IWeatherCountries>(jsonData);
+  // const [data] = useState<IWeatherCountries>(jsonData);
   const [displayData, setDisplayData] = useState<IWeatherCountries>();
   const [temperatures, setTemperatures] =
     useState<number[]>(INITIAL_TEMPERATURES);
   const [sortBy, setSortBy] = useState<number>(INITIAL_SORTBY);
-  // const { isLoading, data } = useQuery(vscode-file://vscode-app/c:/Users/qzsec/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html"suitable-temperature", () => {
-  //   return fetch("http://localhost:8080/suitable-temperature").then((res) =>
-  //     res.json()
-  //   );
-  // });
+  const { isLoading, data } = useQuery<IWeatherCountries>(
+    "all-weather",
+    getAllWeather
+  );
 
   const onValid = (validData: IFormInputs) => {
     navigate(
@@ -66,27 +65,31 @@ const List = () => {
   };
 
   useEffect(() => {
-    setDisplayData(sortData("", data, temperatures, sortBy));
-  }, []);
+    data && setDisplayData(sortData("", data, temperatures, sortBy));
+  }, [data]);
 
   return (
-    <Stack minH={"70vh"}>
+    <Stack minH={"70vh"} w={{ base: "xs", md: "md", lg: "3xl" }}>
       {/* 메인 메시지 영역 */}
       <VStack py={10} userSelect={"none"}>
         <Box fontFamily={"Black Han Sans"}>
-          <Text display={"inline"} fontSize="5xl">
-            춥다면 춥지 않으면 된다. 덥다면 덥지 않으면 된다.
+          <Text display={"inline"} fontSize="3xl">
+            춥다면 춥지 않으면 된다.
+          </Text>
+          <br />
+          <Text display={"inline"} fontSize="3xl">
+            덥다면 덥지 않으면 된다.
           </Text>
         </Box>
 
         <Stack>
-          <Text fontSize="lg" color={"gray.400"}>
-            환경 탓, 날씨 탓 해봤자 뭐가 바뀌나요?
+          <Text fontSize="md" color={"gray.400"}>
+            불평만 해봤자 뭐가 바뀌나요?
           </Text>
         </Stack>
         <Stack>
-          <Text fontSize="lg" color={"gray.400"}>
-            선택은 여러분에게 달렸습니다.
+          <Text fontSize="md" color={"gray.400"}>
+            딱 좋은 온도를 한번 찾아봅시다.
           </Text>
         </Stack>
       </VStack>
@@ -156,10 +159,7 @@ const List = () => {
       <VStack spacing={5}>
         {displayData?.slice(0, 5).map((country: IWeatherCountry, index) => {
           return (
-            <Link
-              to={`/suitable-temperature/${country.Key}/${country.GeoPosition.Latitude}/${country.GeoPosition.Longitude}`}
-              key={index}
-            >
+            <Link to={`/suitable-temperature/${country.key}`} key={index}>
               <Grid
                 boxShadow="lg"
                 py="1"
@@ -172,15 +172,14 @@ const List = () => {
               >
                 <Image
                   w={"16"}
+                  border="1px solid"
+                  rounded={"base"}
                   alt="flag"
-                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${country.Country.ID}.svg`}
+                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${country.country_code}.svg`}
                 />
-                <Text>{country.Country.LocalizedName}</Text>
-                <Text>{country.LocalizedName}</Text>
-                <Text>
-                  {country.Temperature.Metric.Value} °
-                  {country.Temperature.Metric.Unit}
-                </Text>
+                <Text>{country.country_localized_name}</Text>
+                <Text>{country.localized_name}</Text>
+                <Text>{country.temperature_value}°C</Text>
               </Grid>
             </Link>
           );

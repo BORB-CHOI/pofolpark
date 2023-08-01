@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             element: <SuitableTemperatureSearch />,
           },
           {
-            path: ":country/:latitude/:longitude",
+            path: ":id",
             element: <SuitableTemperatureDetail />,
           },
         ],

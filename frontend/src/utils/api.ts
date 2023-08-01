@@ -1,6 +1,7 @@
 import Cookie from "js-cookie";
 import axios from "axios";
 import { ITodoVariables } from "../types";
+import { QueryFunctionContext } from "react-query";
 
 const instance = axios.create({
   baseURL:
@@ -25,16 +26,12 @@ export const transformTodo = (variables: ITodoVariables) =>
 export const getSites = () =>
   instance.get(`sites/`).then((response) => response.data);
 
-export const getAllWeather = (variables: ITodoVariables) =>
-  instance
-    .post(`chatgpt/`, variables, {
-      headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
-    })
-    .then((response) => response.data);
+export const getAllWeather = () =>
+  instance.get(`weathers/`).then((response) => response.data);
 
-export const getWeatherDetail = (variables: ITodoVariables) =>
-  instance
-    .post(`chatgpt/`, variables, {
-      headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
-    })
+export const getWeatherDetail = ({ queryKey }: QueryFunctionContext) => {
+  const [_, weatherPk] = queryKey;
+  return instance
+    .get(`weathers/${weatherPk}`)
     .then((response) => response.data);
+};

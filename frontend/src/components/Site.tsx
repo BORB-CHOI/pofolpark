@@ -8,14 +8,14 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import site01 from "../assets/site01.png";
 
 interface ISiteProps {
   title: string;
   link: string;
+  imgSrc: string;
 }
 
-export default function Site({ title, link }: ISiteProps) {
+export default function Site({ title, link, imgSrc }: ISiteProps) {
   const bgColor = useColorModeValue("white", "gray.800");
 
   return (
@@ -66,12 +66,12 @@ export default function Site({ title, link }: ISiteProps) {
                 borderTopRadius={5}
               ></Box>
             </HStack>
-            {site01 ? (
+            {imgSrc ? (
               <Box style={{ aspectRatio: 16 / 9 }} bg={bgColor}>
                 <Image
                   style={{ aspectRatio: 16 / 9 }}
                   objectFit={"cover"}
-                  src={site01}
+                  src={imgSrc}
                 />
               </Box>
             ) : (
