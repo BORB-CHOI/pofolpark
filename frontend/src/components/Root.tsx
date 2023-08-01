@@ -5,7 +5,12 @@ import Footer from "./Footer";
 
 export default function Root() {
   return (
-    <Box>
+    <Box
+      display={"flex"}
+      flexDir={"column"}
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
       <Header />
       <Outlet />
       <Footer />

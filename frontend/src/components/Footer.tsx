@@ -18,7 +18,7 @@ export default function Footer() {
   const bgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Box my={5}>
+    <Box w={"full"} my={5}>
       <Box
         h={10}
         mx={{

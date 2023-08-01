@@ -31,5 +31,7 @@ export const getAllWeather = () =>
 
 export const getWeatherDetail = ({ queryKey }: QueryFunctionContext) => {
   const [_, weatherPk] = queryKey;
-  instance.get(`weathers/${weatherPk}`).then((response) => response.data);
+  return instance
+    .get(`weathers/${weatherPk}`)
+    .then((response) => response.data);
 };

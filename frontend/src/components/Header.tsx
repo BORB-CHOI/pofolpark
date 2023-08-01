@@ -17,7 +17,7 @@ export default function Header() {
   const bgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Box mb={5}>
+    <Box w={"full"} mb={5}>
       <Stack
         justifyContent={"space-between"}
         alignItems="center"

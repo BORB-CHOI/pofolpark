@@ -17,8 +17,9 @@ class Weathers(APIView):
     def get(self, request):
         try:
             all_weathers = Weather.objects.all()
-            serializer = serializers.AllWeatherSerializer(
+            serializer = serializers.WeatherSerializer(
                 all_weathers,
+                many=True,
             )
 
             return Response(
@@ -43,7 +44,9 @@ class WeatherDetail(APIView):
     def get_weather_data(self, latitude, longitude):
         # Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
         api_key = env("OPEN_WEATHER_API_KEY")
-        url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}"
+        language = "kr"
+        units = "metric"
+        url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&lang={language}&units={units}"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -62,9 +65,16 @@ class WeatherDetail(APIView):
             # Call the weather API using latitude and longitude
             weather_data = self.get_weather_data(latitude, longitude)
 
+            serializer = serializers.WeatherSerializer(
+                weather,
+            )
+
             return Response(
-                data=weather_data,
                 status=status.HTTP_200_OK,
+                data={
+                    "db_data": serializer.data,
+                    "api_data": weather_data,
+                },
             )
         except Exception as e:
             print(e)

@@ -1,5 +1,6 @@
 import environ
 import requests
+import datetime
 from django.core.management.base import BaseCommand
 from weathers import models
 
@@ -45,7 +46,11 @@ class Command(BaseCommand):
                     },
                 )
 
-            self.stdout.write(self.style.SUCCESS("Weather data updated successfully."))
+            current_time = datetime.datetime.now()
+            formatted_time = current_time.strftime("%y-%m-%d %H:%M:%S")
+            message = "Weather data updated successfully."
+
+            self.stdout.write(self.style.SUCCESS(f"{formatted_time} | {message}"))
         except Exception as e:
             print(e)
             self.stdout.write(self.style.ERROR("Error updating weather data."))

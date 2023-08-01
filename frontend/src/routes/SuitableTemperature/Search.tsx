@@ -28,10 +28,10 @@ import {
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import jsonData from "../../assets/weather.json";
 import { useSearchParams } from "react-router-dom";
 import { sortData } from "../../utils/suitableTemperatureUtils";
 import { Link, useLocation } from "react-router-dom";
+import { getAllWeather } from "../../utils/api";
 
 interface IFormInputs {
   keyword: string;
@@ -43,7 +43,11 @@ const INITIAL_SORTBY = 0;
 const Search = (props: any) => {
   const bgColor = useColorModeValue("gray.50", "gray.700");
   const { register, handleSubmit } = useForm<IFormInputs>();
-  const [data] = useState<IWeatherCountries>(jsonData);
+  // const [data] = useState<IWeatherCountries>(jsonData);
+  const { isLoading, data } = useQuery<IWeatherCountries>(
+    "all-weather",
+    getAllWeather
+  );
   const [displayData, setDisplayData] = useState<IWeatherCountries>();
 
   // parameters from the URL query
@@ -82,16 +86,17 @@ const Search = (props: any) => {
   };
 
   useEffect(() => {
-    setDisplayData(
-      sortData(searchParams.get("keyword") || "", data, temperatures, sortBy)
-    );
+    data &&
+      setDisplayData(
+        sortData(searchParams.get("keyword") || "", data, temperatures, sortBy)
+      );
   }, [searchParams]);
 
   return (
-    <Stack minH={"70vh"}>
+    <Stack minH={"70vh"} w={{ base: "xs", md: "md", lg: "3xl" }}>
       <VStack py={7} userSelect={"none"}>
         <Box fontFamily={"Black Han Sans"}>
-          <Text display={"inline"} fontSize="7xl">
+          <Text display={"inline"} fontSize="5xl">
             적당한 온도 찾기
           </Text>
         </Box>
@@ -164,7 +169,7 @@ const Search = (props: any) => {
       <VStack spacing={5}>
         {displayData?.map((country: IWeatherCountry, index) => {
           return (
-            <Link to={`/suitable-temperature/${country.Key}`} key={index}>
+            <Link to={`/suitable-temperature/${country.key}`} key={index}>
               <Grid
                 boxShadow="lg"
                 py="6"
@@ -177,12 +182,14 @@ const Search = (props: any) => {
               >
                 <Image
                   w={"16"}
+                  border="1px solid"
+                  rounded={"base"}
                   alt="flag"
-                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${country.Country.ID}.svg`}
+                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${country.country_code}.svg`}
                 />
-                <Text>{country.Country.LocalizedName}</Text>
-                <Text>{country.LocalizedName}</Text>
-                <Text>{country.Temperature.Metric.Value} °C</Text>
+                <Text>{country.country_localized_name}</Text>
+                <Text>{country.localized_name}</Text>
+                <Text>{country.temperature_value}°C</Text>
               </Grid>
             </Link>
           );

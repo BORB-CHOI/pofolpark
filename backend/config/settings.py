@@ -224,8 +224,8 @@ if DEBUG:
 # CronTab 설정
 CRONJOBS = [
     (
-        "*/1 * * * *",
-        "weathers.cron.hello_every_minute",
+        "* */1 * * *",
+        "weathers.management.commands.update_weather",
         ">> " + os.path.join(BASE_DIR, "config/log/cron.log"),
     ),
 ]

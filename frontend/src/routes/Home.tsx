@@ -15,7 +15,8 @@ export default function Home() {
 
   return (
     <Box
-      mx={{
+      w={"full"}
+      px={{
         base: 5,
         lg: 10,
       }}
@@ -54,6 +55,7 @@ export default function Home() {
 
       {/* 콘텐츠 영역 */}
       <Grid
+        w={"full"}
         mt={10}
         columnGap={8}
         rowGap={10}
@@ -78,12 +80,10 @@ export default function Home() {
           </>
         ) : (
           <>
-            <Site title={"이상한 투두 생성기"} link={"/trans-todo"} />
             <Site
-              title={
-                "여름이 싫으면 여름이 아니면 된다. 겨울이 싫다면 겨울이 아니면 된다."
-              }
+              title={"여름이 싫다면 여름이 아니면 된다."}
               link={"/suitable-temperature"}
+              imgSrc="images/suitableTemp.png"
             />
           </>
         )}

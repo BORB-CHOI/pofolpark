@@ -17,67 +17,88 @@ export interface ITodoVariables {
   todo: string;
 }
 
+// ----------------------------------------------------------------
+
+// Weathers Interface
+
 export interface IWeatherCountries extends Array<IWeatherCountry> {}
 
 export interface IWeatherCountry {
-  Country: Country;
-  EnglishName: string;
-  EpochTime: number;
-  GeoPosition: GeoPosition;
-  HasPrecipitation: boolean;
-  IsDayTime: boolean;
-  Key: string;
-  Link: string;
-  LocalObservationDateTime: string;
-  LocalizedName: string;
-  MobileLink: string;
-  PrecipitationType: string | null;
-  Temperature: Temperature;
-  TimeZone: TimeZone;
-  WeatherIcon: number;
-  WeatherText: string;
+  key: number;
+  country_code: string;
+  country_localized_name: string;
+  localized_name: string;
+  temperature_value: number;
 }
 
-interface Country {
-  EnglishName: string;
-  ID: string;
-  LocalizedName: string;
+// ----------------------------------------------------------------
+
+// Weather Detail Interface
+
+interface Coord {
+  lon: number;
+  lat: number;
 }
 
-interface GeoPosition {
-  Elevation: {
-    Imperial: {
-      Unit: string;
-      UnitType: number;
-      Value: number;
-    };
-    Metric: {
-      Unit: string;
-      UnitType: number;
-      Value: number;
-    };
-  };
-  Latitude: number;
-  Longitude: number;
+interface Weather {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
 }
 
-interface Temperature {
-  Imperial: {
-    Unit: string;
-    UnitType: number;
-    Value: number;
-  };
-  Metric: {
-    Unit: string;
-    UnitType: number;
-    Value: number;
-  };
+interface Main {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
 }
 
-interface TimeZone {
-  Code: string;
-  GmtOffset: number;
-  IsDaylightSaving: boolean;
-  Name: string;
-  NextOffsetChange: string | null;
+interface Wind {
+  speed: number;
+  deg: number;
+  gust: number;
+}
+
+interface Clouds {
+  all: number;
+}
+
+interface Sys {
+  type: number;
+  id: number;
+  country: string;
+  sunrise: number;
+  sunset: number;
+}
+
+interface APIWeatherData {
+  coord: Coord;
+  weather: Weather[];
+  base: string;
+  main: Main;
+  visibility: number;
+  wind: Wind;
+  clouds: Clouds;
+  dt: number;
+  sys: Sys;
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
+}
+
+interface DBWeatherData {
+  key: number;
+  country_code: string;
+  country_localized_name: string;
+  localized_name: string;
+  temperature_value: string;
+}
+
+interface WeatherDetail {
+  api_data: APIWeatherData;
+  db_data: DBWeatherData;
 }
