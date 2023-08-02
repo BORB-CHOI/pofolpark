@@ -2,6 +2,9 @@
 # exit on error
 set -o errexit
 
+apt-get update
+apt-get install cron
+
 
 pip install --upgrade pip
 pip install poetry==1.2.0
@@ -17,4 +20,3 @@ python manage.py migrate
 python manage.py crontab show
 python manage.py crontab add
 python manage.py crontab show
-which crontab
