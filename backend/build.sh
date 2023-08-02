@@ -2,7 +2,8 @@
 # exit on error
 set -o errexit
 
-
+sudo apt-get update    
+sudo apt-get install cron
 pip install --upgrade pip
 pip install poetry==1.2.0
 rm poetry.lock
