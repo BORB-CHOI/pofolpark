@@ -72,7 +72,9 @@ if RENDER_EXTERNAL_HOSTNAME:
 THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
-    "django_crontab",
+    "celery",
+    "django_celery_beat",
+    "django_celery_results",
 ]
 
 CUSTOM_APPS = [
@@ -221,11 +223,24 @@ if DEBUG:
     XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
 
 
-# CronTab 설정
-CRONJOBS = [
-    (
-        "* */1 * * *",
-        "weathers.management.commands.update_weather",
-        ">> " + os.path.join(BASE_DIR, "config/log/cron.log"),
-    ),
-]
+# Celery 설정
+CELERY_BROKER_URL = "redis://default:A1vkqILhWMIcBFR0T6wvpSGpu7tCq2zg@redis-17856.c294.ap-northeast-1-2.ec2.cloud.redislabs.com:17856"
+CELERY_RESULT_BACKEND = "redis://default:A1vkqILhWMIcBFR0T6wvpSGpu7tCq2zg@redis-17856.c294.ap-northeast-1-2.ec2.cloud.redislabs.com:17856"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+CELERY_TIMEZONE = "Asia/Seoul"
+CELERY_ENABLE_UTC = False
+
+
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 60 * 60
+
+# Celery Beat 설정
+CELERY_BEAT_SCHEDULE = {
+    "update_weather": {
+        "task": "weathers.tasks.update_weather",
+        "schedule": 3600.0,
+    },
+}
