@@ -12,22 +12,27 @@ const instance = axios.create({
   // 2. 헤더에 Authorization 항목이 있는 요청
 });
 
+const BASE_URL =
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_API_LOCAL_URL
+    : process.env.REACT_APP_API_URL;
+
 export const transformTodo = (variables: ITodoVariables) =>
   instance
-    .post(`api/v1/chatgpt/`, variables, {
+    .post(`${BASE_URL}chatgpt/`, variables, {
       headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
     })
     .then((response) => response.data);
 
 export const getSites = () =>
-  instance.get(`api/v1/sites/`).then((response) => response.data);
+  instance.get(`${BASE_URL}sites/`).then((response) => response.data);
 
 export const getAllWeather = () =>
-  instance.get(`api/v1/weathers/`).then((response) => response.data);
+  instance.get(`${BASE_URL}weathers/`).then((response) => response.data);
 
 export const getWeatherDetail = ({ queryKey }: QueryFunctionContext) => {
   const [_, weatherPk] = queryKey;
   return instance
-    .get(`api/v1/weathers/${weatherPk}`)
+    .get(`${BASE_URL}weathers/${weatherPk}`)
     .then((response) => response.data);
 };
