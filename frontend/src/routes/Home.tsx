@@ -84,7 +84,8 @@ export default function Home() {
               title={"여름이 싫다면 여름이 아니면 된다."}
               link={"/suitable-temperature"}
               imgSrc={
-                process.env.PUBLIC_URL + "/assets/images/suitableTemp.png"
+                process.env.PUBLIC_URL +
+                "/assets/images/suitableTemperature.png"
               }
             />
           </>
