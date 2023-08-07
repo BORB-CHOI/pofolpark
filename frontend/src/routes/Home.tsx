@@ -3,7 +3,7 @@ import { useState } from "react";
 import Site from "../components/Site";
 import SiteSkeleton from "../components/SiteSkeleton";
 import { useQuery } from "react-query";
-import { getSites } from "../utils/api";
+import { getSites } from "../api";
 
 export default function Home() {
   // const { isLoading: sitesIsLoading, data } = useQuery<[]>(["sites"], getSites);

@@ -1,6 +1,6 @@
 import Cookie from "js-cookie";
 import axios from "axios";
-import { ITodoVariables } from "../types";
+import { ITodoVariables } from "./types";
 import { QueryFunctionContext } from "react-query";
 
 const instance = axios.create({

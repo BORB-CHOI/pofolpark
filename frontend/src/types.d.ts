@@ -21,8 +21,6 @@ export interface ITodoVariables {
 
 // Weathers Interface
 
-export interface IWeatherCountries extends Array<IWeatherCountry> {}
-
 export interface IWeatherCountry {
   key: number;
   country_code: string;

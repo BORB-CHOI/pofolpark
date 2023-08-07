@@ -31,7 +31,7 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { sortData } from "../../utils/suitableTemperatureUtils";
 import { Link, useLocation } from "react-router-dom";
-import { getAllWeather } from "../../utils/api";
+import { getAllWeather } from "../../api";
 
 interface IFormInputs {
   keyword: string;
