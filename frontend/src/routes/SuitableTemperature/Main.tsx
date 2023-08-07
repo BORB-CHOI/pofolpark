@@ -1,4 +1,4 @@
-import { IWeatherCountries, IWeatherCountry } from "../../types";
+import { IWeatherCountry } from "../../types";
 import { FaTemperatureArrowDown, FaTemperatureArrowUp } from "react-icons/fa6";
 import { useQuery } from "react-query";
 import {
@@ -31,7 +31,7 @@ import { useForm } from "react-hook-form";
 
 import { Link, useNavigate } from "react-router-dom";
 import { sortData } from "../../utils/suitableTemperatureUtils";
-import { getAllWeather } from "../../utils/api";
+import { getAllWeather } from "../../api";
 
 interface IFormInputs {
   keyword: string;
@@ -45,12 +45,12 @@ const List = () => {
   const bgColor = useColorModeValue("gray.50", "gray.700");
   const { register, handleSubmit } = useForm<IFormInputs>();
   // const [data] = useState<IWeatherCountries>(jsonData);
-  const [displayData, setDisplayData] = useState<IWeatherCountries>();
+  const [displayData, setDisplayData] = useState<IWeatherCountry[]>();
   const [temperatures, setTemperatures] =
     useState<number[]>(INITIAL_TEMPERATURES);
   const [sortBy, setSortBy] = useState<number>(INITIAL_SORTBY);
-  const { isLoading, data } = useQuery<IWeatherCountries>(
-    "all-weather",
+  const { isLoading, data } = useQuery<IWeatherCountry[]>(
+    ["all-weather"],
     getAllWeather
   );
 

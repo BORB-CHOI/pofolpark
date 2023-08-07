@@ -17,7 +17,7 @@ import { BiWind } from "react-icons/bi";
 import { IoWaterOutline } from "react-icons/io5";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { getWeatherDetail } from "../../utils/api";
+import { getWeatherDetail } from "../../api";
 import { WeatherDetail } from "../../types";
 
 const Detail = () => {

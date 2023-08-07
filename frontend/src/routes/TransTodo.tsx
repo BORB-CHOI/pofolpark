@@ -24,7 +24,7 @@ import { useMutation } from "react-query";
 import { ITodoVariables } from "../types";
 import { TbTargetArrow } from "react-icons/tb";
 import { RiEmotionLine } from "react-icons/ri";
-import { transformTodo } from "../utils/api";
+import { transformTodo } from "../api";
 import { useState } from "react";
 
 const COUNTDOWN = 10;
