@@ -12,7 +12,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { BsEye } from "react-icons/bs";
 import { BiWind } from "react-icons/bi";
 import { IoWaterOutline } from "react-icons/io5";
