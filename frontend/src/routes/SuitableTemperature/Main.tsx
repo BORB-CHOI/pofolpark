@@ -84,12 +84,7 @@ const List = () => {
 
         <Stack>
           <Text fontSize="md" color={"gray.400"}>
-            불평만 해봤자 뭐가 바뀌나요?
-          </Text>
-        </Stack>
-        <Stack>
-          <Text fontSize="md" color={"gray.400"}>
-            딱 좋은 온도를 한번 찾아봅시다.
+            내가 좋아하는 날씨가 어디 있을지 한번 찾아봅시다.
           </Text>
         </Stack>
       </VStack>
