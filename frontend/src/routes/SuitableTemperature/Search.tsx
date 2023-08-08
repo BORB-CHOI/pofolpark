@@ -1,4 +1,4 @@
-import { IWeatherCountries, IWeatherCountry } from "../../types";
+import { IWeatherCountry } from "../../types";
 import { FaTemperatureArrowDown, FaTemperatureArrowUp } from "react-icons/fa6";
 import { useQuery } from "react-query";
 import {
@@ -43,12 +43,12 @@ const INITIAL_SORTBY = 0;
 const Search = (props: any) => {
   const bgColor = useColorModeValue("gray.50", "gray.700");
   const { register, handleSubmit } = useForm<IFormInputs>();
-  // const [data] = useState<IWeatherCountries>(jsonData);
-  const { isLoading, data } = useQuery<IWeatherCountries>(
+  // const [data] = useState<IWeatherCountry[]>(jsonData);
+  const { isLoading, data } = useQuery<IWeatherCountry[]>(
     "all-weather",
     getAllWeather
   );
-  const [displayData, setDisplayData] = useState<IWeatherCountries>();
+  const [displayData, setDisplayData] = useState<IWeatherCountry[]>();
 
   // parameters from the URL query
   const location = useLocation();

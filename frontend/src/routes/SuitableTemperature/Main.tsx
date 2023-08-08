@@ -44,7 +44,7 @@ const List = () => {
   const navigate = useNavigate();
   const bgColor = useColorModeValue("gray.50", "gray.700");
   const { register, handleSubmit } = useForm<IFormInputs>();
-  // const [data] = useState<IWeatherCountries>(jsonData);
+  // const [data] = useState<IWeatherCountry[]>(jsonData);
   const [displayData, setDisplayData] = useState<IWeatherCountry[]>();
   const [temperatures, setTemperatures] =
     useState<number[]>(INITIAL_TEMPERATURES);
