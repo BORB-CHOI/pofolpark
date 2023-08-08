@@ -1,8 +1,8 @@
-import { IWeatherCountries, IWeatherCountry } from "../types";
+import { IWeatherCountry } from "../types";
 
 export const sortData = (
   keyword: string,
-  data: IWeatherCountries,
+  data: IWeatherCountry[],
   temperatures: number[],
   sortBy: number
 ) => {
