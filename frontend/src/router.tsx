@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
-import TransTodo from "./routes/TransTodo";
+// Suitable Temperature
 import SuitableTemperatureMain from "./routes/SuitableTemperature/Main";
 import SuitableTemperatureSearch from "./routes/SuitableTemperature/Search";
 import SuitableTemperatureDetail from "./routes/SuitableTemperature/Detail";
-// What the fuck
+// Insta Brain
 
 const router = createBrowserRouter([
   {
@@ -34,9 +34,10 @@ const router = createBrowserRouter([
             element: <SuitableTemperatureDetail />,
           },
         ],
-      }, // {
-      //   path: "trans-todo",
-      //   element: <TransTodo />,
+      },
+      // {
+      //   path: "insta-brain",
+      //   element: <InstaBrainMain />,
       // },
     ],
   },

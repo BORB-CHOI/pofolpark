@@ -88,6 +88,7 @@ export default function Home() {
                 "/assets/images/suitableTemperature.png"
               }
             />
+            <Site title={"인스타 브레인"} link={"/insta-brain"} imgSrc={""} />
           </>
         )}
       </Grid>
