@@ -8,7 +8,6 @@ import {
   Center,
   FormControl,
   Grid,
-  Heading,
   Image,
   Input,
   Menu,
@@ -44,10 +43,7 @@ const Search = (props: any) => {
   const bgColor = useColorModeValue("gray.50", "gray.700");
   const { register, handleSubmit } = useForm<IFormInputs>();
   // const [data] = useState<IWeatherCountry[]>(jsonData);
-  const { isLoading, data } = useQuery<IWeatherCountry[]>(
-    "all-weather",
-    getAllWeather
-  );
+  const { data } = useQuery<IWeatherCountry[]>("all-weather", getAllWeather);
   const [displayData, setDisplayData] = useState<IWeatherCountry[]>();
 
   // parameters from the URL query
@@ -90,6 +86,7 @@ const Search = (props: any) => {
       setDisplayData(
         sortData(searchParams.get("keyword") || "", data, temperatures, sortBy)
       );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Cookie from "js-cookie";
 import axios from "axios";
 import { ITodoVariables } from "./types";

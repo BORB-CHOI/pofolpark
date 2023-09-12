@@ -8,8 +8,6 @@ import {
   Center,
   FormControl,
   Grid,
-  HStack,
-  Heading,
   Image,
   Input,
   Menu,
@@ -49,10 +47,7 @@ const List = () => {
   const [temperatures, setTemperatures] =
     useState<number[]>(INITIAL_TEMPERATURES);
   const [sortBy, setSortBy] = useState<number>(INITIAL_SORTBY);
-  const { isLoading, data } = useQuery<IWeatherCountry[]>(
-    ["all-weather"],
-    getAllWeather
-  );
+  const { data } = useQuery<IWeatherCountry[]>(["all-weather"], getAllWeather);
 
   const onValid = (validData: IFormInputs) => {
     navigate(
@@ -66,6 +61,7 @@ const List = () => {
 
   useEffect(() => {
     data && setDisplayData(sortData("", data, temperatures, sortBy));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
