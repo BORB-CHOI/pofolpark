@@ -6,7 +6,9 @@ import NotFound from "./routes/NotFound";
 import SuitableTemperatureMain from "./routes/SuitableTemperature/Main";
 import SuitableTemperatureSearch from "./routes/SuitableTemperature/Search";
 import SuitableTemperatureDetail from "./routes/SuitableTemperature/Detail";
-// Insta Brain
+
+// Lucky Draw
+import LuckyDrawMain from "./routes/LuckyDraw/Main";
 
 const router = createBrowserRouter([
   {
@@ -35,11 +37,11 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // {
-      //   path: "insta-brain",
-      //   element: <InstaBrainMain />,
-      // },
     ],
+  },
+  {
+    path: "lucky-draw",
+    element: <LuckyDrawMain />,
   },
 ]);
 

@@ -88,7 +88,11 @@ export default function Home() {
                 "/assets/images/suitableTemperature.png"
               }
             />
-            <Site title={"인스타 브레인"} link={"/insta-brain"} imgSrc={""} />
+            <Site
+              title={"럭키 드로우 영상 갓챠"}
+              link={"/lucky-draw"}
+              imgSrc={""}
+            />
           </>
         )}
       </Grid>
