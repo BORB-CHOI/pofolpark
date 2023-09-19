@@ -91,7 +91,7 @@ export default function Home() {
             <Site
               title={"럭키 드로우 영상 갓챠"}
               link={"/lucky-draw"}
-              imgSrc={""}
+              imgSrc={process.env.PUBLIC_URL + "/assets/images/luckyDraw.png"}
             />
           </>
         )}
