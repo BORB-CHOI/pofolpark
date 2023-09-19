@@ -36,3 +36,6 @@ export const getWeatherDetail = ({ queryKey }: QueryFunctionContext) => {
     .get(`weathers/${weatherPk}`)
     .then((response) => response.data);
 };
+
+export const getLuckyVedios = () =>
+  instance.get(`lucky-draw/`).then((response) => response.data);

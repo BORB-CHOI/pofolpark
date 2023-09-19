@@ -81,7 +81,7 @@ export default function Home() {
         ) : (
           <>
             <Site
-              title={"여름이 싫다면 여름이 아니면 된다."}
+              title={"여름이 싫다면 여름이 아니면 되지"}
               link={"/suitable-temperature"}
               imgSrc={
                 process.env.PUBLIC_URL +
