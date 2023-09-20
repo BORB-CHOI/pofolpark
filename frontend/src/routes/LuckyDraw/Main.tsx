@@ -126,7 +126,6 @@ const Main = () => {
       videoBoxAnimate(videoBoxScope.current, {
         borderRadius: "50%",
         width: "0%",
-        aspectRatio: 1 / 1,
       }).then(() =>
         videoBoxAnimate(
           videoBoxScope.current,
@@ -169,7 +168,7 @@ const Main = () => {
               key={0}
               style={{ aspectRatio: 1 / 1 }}
               width={"3%"}
-              maxW={{ base: "lg" }}
+              maxW={{ base: "xl" }}
               rounded={"full"}
               position={"absolute"}
               bgColor={"#1D8C5C"}
