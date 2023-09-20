@@ -2,8 +2,8 @@ import { Box, Grid, HStack, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import Site from "../components/Site";
 import SiteSkeleton from "../components/SiteSkeleton";
-import { useQuery } from "react-query";
-import { getSites } from "../api";
+// import { useQuery } from "react-query";
+// import { getSites } from "../api";
 
 export default function Home() {
   // const { isLoading: sitesIsLoading, data } = useQuery<[]>(["sites"], getSites);
@@ -81,12 +81,17 @@ export default function Home() {
         ) : (
           <>
             <Site
-              title={"여름이 싫다면 여름이 아니면 된다."}
+              title={"여름이 싫다면 여름이 아니면 되지"}
               link={"/suitable-temperature"}
               imgSrc={
                 process.env.PUBLIC_URL +
                 "/assets/images/suitableTemperature.png"
               }
+            />
+            <Site
+              title={"럭키 드로우 영상 갓챠"}
+              link={"/lucky-draw"}
+              imgSrc={process.env.PUBLIC_URL + "/assets/images/luckyDraw.png"}
             />
           </>
         )}

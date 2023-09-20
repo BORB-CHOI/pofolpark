@@ -1,20 +1,6 @@
-import { FaMoon, FaSun } from "react-icons/fa";
-import { AiTwotoneHome } from "react-icons/ai";
-
-import {
-  Box,
-  HStack,
-  IconButton,
-  Stack,
-  Text,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 
 export default function Footer() {
-  const { toggleColorMode } = useColorMode();
-  const Icon = useColorModeValue(FaMoon, FaSun);
   const bgColor = useColorModeValue("white", "gray.800");
 
   return (

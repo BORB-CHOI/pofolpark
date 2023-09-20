@@ -2,13 +2,11 @@ import {
   Box,
   Card,
   CardBody,
-  CardHeader,
   HStack,
   Heading,
   Image,
   Spinner,
   Stack,
-  StackDivider,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";

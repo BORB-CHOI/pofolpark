@@ -78,6 +78,7 @@ CUSTOM_APPS = [
     "common.apps.CommonConfig",
     "chatgpt.apps.ChatgptConfig",
     "weathers.apps.WeathersConfig",
+    "lucky_draw.apps.LuckyDrawConfig",
 ]
 
 SYSTEM_APPS = [

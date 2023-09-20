@@ -21,10 +21,10 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { ITodoVariables } from "../types";
+import { ITodoVariables } from "@src/types";
 import { TbTargetArrow } from "react-icons/tb";
 import { RiEmotionLine } from "react-icons/ri";
-import { transformTodo } from "../api";
+import { transformTodo } from "@src/api";
 import { useState } from "react";
 
 const COUNTDOWN = 10;

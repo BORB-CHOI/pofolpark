@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/chatgpt/", include("chatgpt.urls")),
     path("api/v1/weathers/", include("weathers.urls")),
+    path("api/v1/lucky-draw/", include("lucky_draw.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

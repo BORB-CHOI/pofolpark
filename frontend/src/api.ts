@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Cookie from "js-cookie";
 import axios from "axios";
 import { ITodoVariables } from "./types";
@@ -35,3 +36,6 @@ export const getWeatherDetail = ({ queryKey }: QueryFunctionContext) => {
     .get(`weathers/${weatherPk}`)
     .then((response) => response.data);
 };
+
+export const getLuckyVedios = () =>
+  instance.get(`lucky-draw/`).then((response) => response.data);
