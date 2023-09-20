@@ -60,7 +60,7 @@ const videoBox = {
     },
   }),
   animate_2: (animateDelay: number) => ({
-    height: "90%",
+    width: "90%",
     aspectRatio: 16 / 9,
     transition: {
       delay: animateDelay + 1,
@@ -125,12 +125,12 @@ const Main = () => {
     if (titleIsHide) {
       videoBoxAnimate(videoBoxScope.current, {
         borderRadius: "50%",
-        height: "0%",
+        width: "0%",
         aspectRatio: 1 / 1,
       }).then(() =>
         videoBoxAnimate(
           videoBoxScope.current,
-          { borderRadius: "0px", height: "90%", aspectRatio: 16 / 9 },
+          { borderRadius: "0px", width: "90%", aspectRatio: 16 / 9 },
           { delay: animateDelay + 0.5, duration: 0.5 }
         )
       );
@@ -168,7 +168,8 @@ const Main = () => {
               ref={videoBoxScope}
               key={0}
               style={{ aspectRatio: 1 / 1 }}
-              h={"5%"}
+              width={"3%"}
+              maxW={{ base: "lg" }}
               rounded={"full"}
               position={"absolute"}
               bgColor={"#1D8C5C"}
