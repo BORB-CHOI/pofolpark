@@ -1,6 +1,6 @@
 {
-  "name": "Too Simple App",
-  "short_name": "This Site Is Very Simple.",
+  "name": "toooooo simple",
+  "short_name": "Too Simple",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,7 +10,8 @@
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
