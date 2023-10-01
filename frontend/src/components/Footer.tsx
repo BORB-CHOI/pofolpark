@@ -1,4 +1,5 @@
 import { Box, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const bgColor = useColorModeValue("white", "gray.800");
@@ -25,12 +26,19 @@ export default function Footer() {
 
       {/* Footer Company Describe */}
       <Stack
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", md: "column" }}
         my={5}
         align="center"
         justify="center"
       >
-        <Text>@too_simple_dev</Text>
+        <Text opacity={0.7}>
+          Copyright©2023 @Too_Simple_Dev All rights reserved.
+        </Text>
+        <Link to={"/policy"}>
+          <Text opacity={0.5} fontSize={"sm"}>
+            개인정보처리방침
+          </Text>
+        </Link>
       </Stack>
     </Box>
   );

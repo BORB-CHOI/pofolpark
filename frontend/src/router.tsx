@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root";
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
+import Policy from "./routes/Policy";
 // Suitable Temperature
 import SuitableTemperatureMain from "./routes/SuitableTemperature/Main";
 import SuitableTemperatureSearch from "./routes/SuitableTemperature/Search";
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      { path: "policy", element: <Policy /> },
     ],
   },
   {
